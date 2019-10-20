@@ -1,3 +1,4 @@
+export {};
 let mongoose = require('mongoose');
 
 let taskSchema = new mongoose.Schema({

@@ -7,6 +7,7 @@ var cors = require('cors')
 const app = express();
 dotenv.config();
 
+
 const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,6 +27,18 @@ app.listen(port, () => {
 });
 
 app.use('/api', require('./routers'));
+
+
+// essa biblioteca será utilizada na API para fazer autenticaçao seguindo o método JWT. 
+// Se quiser estudar um pouco mais sobre JWT, pesquise aqui
+// https://jwt.io/introduction/
+//var expressJwt = require('express-jwt');
+// carrega as configurações mapeadas no json
+//var config = require('tsconfig.json');
+
+// DESCOMENTAR ESSA LINHA!!!
+//api.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+
 
 
 const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
