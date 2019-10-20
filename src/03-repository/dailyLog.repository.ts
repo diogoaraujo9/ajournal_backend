@@ -6,12 +6,32 @@ class DailyLogRepository
 {
     public async save(_dailyLog: DailyLog): Promise<DailyLog>
     {
+        let savedDaily = new DailyLog();
         try 
         {
             let dailyModel = new DailyModel(_dailyLog);
-            const savedDaily = await dailyModel.save(_dailyLog);
+            if(_dailyLog._id != null){
+                savedDaily = await dailyModel.update(_dailyLog);
+            }
+            else{                
+                savedDaily = await dailyModel.save(_dailyLog);
+            }
     
             return savedDaily;
+        } 
+        catch (error) 
+        {
+            throw error;
+        }
+    }
+    public async remove(_dailyLog: DailyLog): Promise<DailyLog>
+    {
+        try 
+        {
+            let dailyModel = new DailyModel(_dailyLog);
+            const daily = await dailyModel.remove({id:_dailyLog._id});
+    
+            return daily.deletedCount;
         } 
         catch (error) 
         {

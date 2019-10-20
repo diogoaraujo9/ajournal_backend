@@ -1,19 +1,19 @@
 import { NextFunction, Response, Request } from "express";
-import DailyService from "../02-service/dailyLog.service";
+import CategoriaService from "../02-service/categoria.service";
 
-export default class DailyLogController
+export default class CategoriaController
 {
     public save(req: Request, res: Response, next: NextFunction)
     {
-        let dailyService: DailyService = new DailyService();
+        let categoriaService: CategoriaService = new CategoriaService();
         try
         {
             var body = req.body; 
 
-            dailyService.save(body)
-                .then(function(dailyLog)
+            categoriaService.save(body,body._id)
+                .then(function(categoria)
                 {
-                    res.status(200).json(dailyLog);
+                    res.status(200).json(categoria);
                 })
                 .catch(function(err)
                 {
@@ -26,17 +26,18 @@ export default class DailyLogController
         }
     }
 
+    
     public remove(req: Request, res: Response, next: NextFunction)
     {
-        let dailyService: DailyService = new DailyService();
+        let categoriaService: CategoriaService = new CategoriaService();
         try
         {
             var body = req.body; 
 
-            dailyService.remove(body)
-                .then(function(dailyLog)
+            categoriaService.save(body,body._id)
+                .then(function(categoria)
                 {
-                    res.status(200).json(dailyLog);
+                    res.status(200).json(categoria);
                 })
                 .catch(function(err)
                 {

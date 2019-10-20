@@ -1,5 +1,5 @@
 export {};
-let mongoose1 = require('mongoose');
+const mongoose1 = require('mongoose');
 
 let dailySchema = new mongoose1.Schema({
     descricao: String,

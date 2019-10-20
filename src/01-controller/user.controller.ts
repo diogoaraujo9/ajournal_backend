@@ -1,19 +1,19 @@
 import { NextFunction, Response, Request } from "express";
-import DailyService from "../02-service/dailyLog.service";
+import UserService from "../02-service/user.service";
 
-export default class DailyLogController
+export default class UserController
 {
     public save(req: Request, res: Response, next: NextFunction)
     {
-        let dailyService: DailyService = new DailyService();
+        let userService: UserService = new UserService();
         try
         {
             var body = req.body; 
 
-            dailyService.save(body)
-                .then(function(dailyLog)
+            userService.save(body,body._id)
+                .then(function(user)
                 {
-                    res.status(200).json(dailyLog);
+                    res.status(200).json(user);
                 })
                 .catch(function(err)
                 {
@@ -28,15 +28,15 @@ export default class DailyLogController
 
     public remove(req: Request, res: Response, next: NextFunction)
     {
-        let dailyService: DailyService = new DailyService();
+        let userService: UserService = new UserService();
         try
         {
             var body = req.body; 
 
-            dailyService.remove(body)
-                .then(function(dailyLog)
+            userService.save(body,body._id)
+                .then(function(user)
                 {
-                    res.status(200).json(dailyLog);
+                    res.status(200).json(user);
                 })
                 .catch(function(err)
                 {
@@ -48,7 +48,7 @@ export default class DailyLogController
             res.status(400).json(err);
         }
     }
-
+    
     public test(req: Request, res: Response, next: NextFunction)
     {
         res.send("Teste!");

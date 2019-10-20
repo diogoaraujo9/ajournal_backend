@@ -17,4 +17,18 @@ export default class DailyService
             throw error;
         }
     }
+    
+    public async remove(_dailyLog: DailyLog): Promise<DailyLog>
+    {
+        try 
+        {
+            const savedDailyLog = await dailyLogRepository.remove(_dailyLog);
+            
+            return savedDailyLog;
+        } 
+        catch (error) 
+        {
+            throw error;
+        }
+    }
 }
