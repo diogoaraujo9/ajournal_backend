@@ -4,4 +4,5 @@ export class User
     usuario: string;
     nome: string;
     senha: string;
+    hash: string
 }
