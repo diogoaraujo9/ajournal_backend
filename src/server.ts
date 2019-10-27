@@ -27,6 +27,10 @@ app.get("/", ( req, res ) => {
     res.send("Hello world!");
 });
 
+app.get("/teste", ( req, res ) => {
+    res.send("Hello world! 22222");
+});
+
 app.listen(port, () => {
     // tslint:disable-next-line:no-console
     console.log(`Listening at http://localhost:${port}`);
