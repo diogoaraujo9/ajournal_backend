@@ -18,6 +18,7 @@ router.post('/deleteDailyLog', dailyLogController.remove);
 router.post('/createUser', userController.save);
 router.post('/updateUser', userController.save);
 router.post('/deleteUser', userController.remove);
+router.post('/authenticateUser', userController.authenticate);
 router.post('/createCategoria', categoriaController.save);
 router.post('/updateCategoria', categoriaController.save);
 router.post('/deleteCategoria', categoriaController.remove);

@@ -1,6 +1,9 @@
 import { User } from "../02-service/model/user.model";
 import bcrypt from 'bcryptjs';
 import _ from 'lodash';
+import Q from 'q';
+import jwt from 'jsonwebtoken';
+//import config from 'config.json';
 
 let UserModel = require('../04-infra/models/user');
 
@@ -31,6 +34,26 @@ class UserRepository
         {
             throw error;
         }
+    }
+
+    
+    public async authenticate(_user: User) {
+        var deferred = Q.defer();
+        
+        let authUser = new UserModel(_user);
+        
+        authUser = await UserModel.findOne({usuario:_user.usuario})      
+
+            if (_user && bcrypt.compareSync(_user.senha, authUser.hash)) {
+                // authentication successful
+                deferred.resolve({token :jwt.sign({ sub: authUser._id }, 'API SECRET'), userId: authUser._id});
+            } else {
+                // authentication failed
+                deferred.resolve();
+            }
+
+        return deferred.promise;
+        
     }
 
     public async remove(_user: User): Promise<User>
