@@ -7,8 +7,12 @@ var cors = require('cors')
 const app = express();
 dotenv.config();
 
+const port = process.env.PORT || 1337;
 
-const port = process.env.PORT || 8080;
+if (process.env.ENV !== 'development') {
+  app.set('trust proxy', true);
+  app.disabled('x-powered-by');
+}
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: ['application/json', 'application/*+json'], limit: '100mb' }));
@@ -17,8 +21,14 @@ app.use(bodyParser.raw({ type: [ 'application/vnd.custom-type' ], limit: '100mb'
 app.use(bodyParser.text({ type: [ 'text/html', 'text/plain', '' ], limit: '100mb' }));
 app.use(cors());
 
+
+
 app.get("/", ( req, res ) => {
     res.send("Hello world!");
+});
+
+app.get("/teste", ( req, res ) => {
+    res.send("Hello world! 22222");
 });
 
 app.listen(port, () => {
