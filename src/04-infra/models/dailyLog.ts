@@ -5,7 +5,8 @@ let dailySchema = new mongoose1.Schema({
     descricao: String,
     tipo: String,
     key: String,
-    data: String
+    data: String,
+    categoriaId: String
 })
 
 module.exports = mongoose1.model('dailyLog', dailySchema);

@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import _ from 'lodash';
 import Q from 'q';
 import jwt from 'jsonwebtoken';
+var config = require('../../config.json');
 let UserModel = require('../04-infra/models/user');
 
 export default class UserService
@@ -23,7 +24,7 @@ export default class UserService
         }
     }
 
-    public async authenticate(_user: User): Promise<User>
+    public async authenticate(_user: User)
     {
         try 
         {
@@ -36,7 +37,7 @@ export default class UserService
 
             if (_user && bcrypt.compareSync(_user.senha, authUser.hash)) {
                 // authentication successful
-                deferred.resolve({token :jwt.sign({ sub: authUser._id }, 'API SECRET'), userId: authUser._id});
+                deferred.resolve({token :jwt.sign({ sub: authUser._id }, config.secret), userId: authUser._id});
             } else {
                 // authentication failed
                 deferred.resolve();

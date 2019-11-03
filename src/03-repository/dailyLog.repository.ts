@@ -24,6 +24,7 @@ class DailyLogRepository
             throw error;
         }
     }
+
     public async remove(_dailyLog: DailyLog): Promise<DailyLog>
     {
         try 
@@ -32,6 +33,21 @@ class DailyLogRepository
             const daily = await dailyModel.remove({id:_dailyLog._id});
     
             return daily.deletedCount;
+        } 
+        catch (error) 
+        {
+            throw error;
+        }
+    }
+
+    
+    public async getDaily(dataInicio: String, dataFim: String): Promise<DailyLog>
+    {
+        try 
+        {
+            const query = await DailyModel.where('data').gte(dataInicio).lte(dataFim);
+    
+            return query;
         } 
         catch (error) 
         {

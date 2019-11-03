@@ -31,4 +31,22 @@ export default class DailyService
             throw error;
         }
     }
+
+    public async getDaily(_dataInicio: String, _dataFim: String): Promise<DailyLog>
+    {
+        try 
+        {
+            const dataInicio = _dataInicio;
+            const dataFim = _dataFim;
+
+            const query = await dailyLogRepository.getDaily(dataInicio, dataFim);
+            
+            return query;
+        } 
+        catch (error) 
+        {
+            throw error;
+        }
+    }
+    
 }

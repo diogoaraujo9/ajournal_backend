@@ -1,3 +1,5 @@
+import { Categoria } from "./categoria.model";
+
 export class DailyLog
 {
     _id?: any;
@@ -5,4 +7,5 @@ export class DailyLog
     tipo: string;
     key: string;
     data: string;
+    categoria: Categoria
 }
