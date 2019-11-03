@@ -55,8 +55,8 @@ export default class DailyLogController
         try
         {
             var body = req.body; 
-            const inicio = new Date(body.dataInicio);
-            let fim = new Date(body.dataInicio);
+            const inicio = new Date(body.data);
+            let fim = new Date(body.data);
             fim.setDate(fim.getDate() + parseInt('7'));
             let dataInicio = inicio.toISOString().substring(0,10);
             let dataFim = fim.toISOString().substring(0,10);
@@ -83,8 +83,8 @@ export default class DailyLogController
         try
         {
             var body = req.body; 
-            const inicio = new Date(body.dataInicio);
-            let fim = new Date(body.dataInicio);
+            const inicio = new Date(body.data);
+            let fim = new Date(body.data);
             let dataInicio = inicio.toISOString().substring(0,8) + '01';
             let dataFim = fim.toISOString().substring(0,8) + '31';
             let dailyService: DailyService = new DailyService();
@@ -111,8 +111,8 @@ export default class DailyLogController
         try
         {
             var body = req.body; 
-            const inicio = new Date(body.dataInicio);
-            let fim = new Date(body.dataInicio);
+            const inicio = new Date(body.data);
+            let fim = new Date(body.data);
             let dataInicio = inicio.toISOString().substring(0,5) + '01-01';
             let dataFim = fim.toISOString().substring(0,5) + '12-31';
             let dailyService: DailyService = new DailyService();
