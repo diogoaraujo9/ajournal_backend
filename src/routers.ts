@@ -11,20 +11,27 @@ const dailyLogController = new DailyLogController();
 const userController = new UserController();
 const categoriaController = new CategoriaController();
 
+// Teste
 router.post('/create', taskController.save);
+router.get('/test', dailyLogController.test);
+
+// Daily
 router.post('/createDailyLog', dailyLogController.save);
 router.post('/updateDailyLog', dailyLogController.save);
 router.post('/deleteDailyLog', dailyLogController.remove);
-router.get('/getDailyWeek', dailyLogController.getDailyWeek);
+router.post('/getDailyWeek', dailyLogController.getDailyWeek);
 router.get('/getMonthlyLog', dailyLogController.getMonthlyLog);
 router.get('/getFutureLog', dailyLogController.getFutureLog);
+
+// User
 router.post('/createUser', userController.save);
 router.post('/updateUser', userController.save);
 router.post('/deleteUser', userController.remove);
 router.post('/authenticateUser', userController.authenticate);
+
+//Categoria
 router.post('/createCategoria', categoriaController.save);
 router.post('/updateCategoria', categoriaController.save);
 router.post('/deleteCategoria', categoriaController.remove);
-router.get('/test', dailyLogController.test);
 
 module.exports = router;
