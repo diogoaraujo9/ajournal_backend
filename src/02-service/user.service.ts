@@ -5,7 +5,8 @@ import bcrypt from 'bcryptjs';
 import _ from 'lodash';
 import Q from 'q';
 import jwt from 'jsonwebtoken';
-var config = require('../../config.json');
+import config from '../config.json';
+//var config = require('../../config.json');
 let UserModel = require('../04-infra/models/user');
 
 export default class UserService
