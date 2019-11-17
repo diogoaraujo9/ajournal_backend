@@ -1,7 +1,9 @@
 const dotenv = require('dotenv');
 import express from "express";
 import * as bodyParser from 'body-parser';
+const expressJwt = require('express-jwt');
 const contextMongoose = require('mongoose');
+import * as config from './config.json';
 
 var cors = require('cors')
 const app = express();
@@ -20,8 +22,11 @@ app.use(bodyParser.text({ type: [ 'application/xml', 'text/xml'], limit: '100mb'
 app.use(bodyParser.raw({ type: [ 'application/vnd.custom-type' ], limit: '100mb' }));
 app.use(bodyParser.text({ type: [ 'text/html', 'text/plain', '' ], limit: '100mb' }));
 app.use(cors());
-
-
+app.use(expressJwt({secret: config.secret}).unless({path: [
+    '/api/authenticateUser',
+    '/api/createUser',
+    '/teste'
+]}));
 
 app.get("/", ( req, res ) => {
     res.send("Hello world!");

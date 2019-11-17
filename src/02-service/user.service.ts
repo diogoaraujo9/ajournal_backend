@@ -32,9 +32,9 @@ export default class UserService
             //let authUser = await userRepository.authenticate(_user);
             var deferred = Q.defer();
             
-        let authUser = new UserModel(_user);
-        
-        authUser = await UserModel.findOne({usuario:_user.usuario})      
+            let authUser = new UserModel(_user);
+            
+            authUser = await UserModel.findOne({usuario:_user.usuario})      
 
             if (_user && bcrypt.compareSync(_user.senha, authUser.hash)) {
                 // authentication successful
