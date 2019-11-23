@@ -30,6 +30,7 @@ router.post('/deleteUser', userController.remove);
 router.post('/authenticateUser', userController.authenticate);
 
 //Categoria
+router.get('/getCategories', categoriaController.getCategories);
 router.post('/createCategoria', categoriaController.save);
 router.post('/updateCategoria', categoriaController.save);
 router.post('/deleteCategoria', categoriaController.remove);

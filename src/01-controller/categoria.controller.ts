@@ -3,14 +3,16 @@ import CategoriaService from "../02-service/categoria.service";
 
 export default class CategoriaController
 {
-    public save(req: Request, res: Response, next: NextFunction)
+    public save(req: any, res: Response, next: NextFunction)
     {
         let categoriaService: CategoriaService = new CategoriaService();
         try
         {
             var body = req.body; 
+            const userId = req.user.sub;
+            body.userId = userId;
 
-            categoriaService.save(body,body._id)
+            categoriaService.save(body, body._id)
                 .then(function(categoria)
                 {
                     res.status(200).json(categoria);
@@ -43,6 +45,29 @@ export default class CategoriaController
                 {
                     res.status(400).json(err);
                 });
+        }
+        catch(err)
+        {
+            res.status(400).json(err);
+        }
+    }
+
+    public getCategories(req: any, res: Response, next: NextFunction)
+    {
+        let categoriaService: CategoriaService = new CategoriaService();
+        try
+        {
+            const userId = req.user.sub;
+
+            categoriaService.getCategories(userId)
+            .then(function(categories)
+            {
+                res.status(200).json(categories);
+            })
+            .catch(function(err)
+            {
+                res.status(400).json(err);
+            });
         }
         catch(err)
         {

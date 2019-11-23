@@ -40,6 +40,24 @@ class CategoriaRepository
             throw error;
         }
     }
+
+    public async getCategories(_userId: string): Promise<Categoria>
+    {
+        try 
+        {
+            const query = {
+                userId: _userId
+            };
+
+            const dailyLogs = await CategoriaModel.find(query);
+    
+            return dailyLogs;
+        } 
+        catch (error) 
+        {
+            throw error;
+        }
+    }
 }
 
 export const categoriaRepository = new CategoriaRepository();

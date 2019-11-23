@@ -32,19 +32,17 @@ export default class CategoriaService
         }
     }
 
-        
-    /*public async authenticate(categorianame: String, password: String): Promise<Categoria>
+    public async getCategories( _userId: string): Promise<Categoria>
     {
-        
         try 
         {
-            const savedCategoria = await categoriaRepository.remove(_id);
+            const categories = await categoriaRepository.getCategories(_userId);
             
-            return savedCategoria;
+            return categories;
         } 
         catch (error) 
         {
             throw error;
         }
-    }*/
+    }
 }
