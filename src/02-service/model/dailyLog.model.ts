@@ -9,4 +9,5 @@ export class DailyLog
     descricao: string;
     key: string;
     categoria: Categoria;
+    userId: string;
 }

@@ -3,12 +3,13 @@ import DailyService from "../02-service/dailyLog.service";
 
 export default class DailyLogController
 {
-    public save(req: Request, res: Response, next: NextFunction)
+    public save(req: any, res: Response, next: NextFunction)
     {
         let dailyService: DailyService = new DailyService();
         try
         {
             var body = req.body; 
+            body.userId = req.user.sub;
 
             dailyService.save(body)
                 .then(function(dailyLog)
@@ -49,19 +50,23 @@ export default class DailyLogController
         }
     }
 
-    public getDailyWeek(req: Request, res: Response, next: NextFunction)
+    public getDailyWeek(req: any, res: Response, next: NextFunction)
     {
         let dailyService: DailyService = new DailyService();
         try
         {
             var body = req.body; 
+            const userId = req.user.sub;
+
             const inicio = new Date(body.data);
+
             let fim = new Date(body.data);
             fim.setDate(fim.getDate() + parseInt('7'));
+
             let dataInicio = inicio.toISOString().substring(0,10);
             let dataFim = fim.toISOString().substring(0,10);
 
-            dailyService.getDaily(dataInicio, dataFim)
+            dailyService.getDaily(dataInicio, dataFim, userId)
                 .then(function(dailyLog)
                 {
                     res.status(200).json(dailyLog);
@@ -77,19 +82,20 @@ export default class DailyLogController
         }
     }
     
-    public getMonthlyLog(req: Request, res: Response, next: NextFunction)
+    public getMonthlyLog(req: any, res: Response, next: NextFunction)
     {        
        
         try
         {
             var body = req.body; 
+            const userId = req.user.sub;
             const inicio = new Date(body.data);
             let fim = new Date(body.data);
             let dataInicio = inicio.toISOString().substring(0,8) + '01';
             let dataFim = fim.toISOString().substring(0,8) + '31';
             let dailyService: DailyService = new DailyService();
 
-            dailyService.getDaily(dataInicio, dataFim)
+            dailyService.getDaily(dataInicio, dataFim, userId)
                 .then(function(dailyLog)
                 {
                     res.status(200).json(dailyLog);
@@ -105,19 +111,19 @@ export default class DailyLogController
         }
     }
     
-    public getFutureLog(req: Request, res: Response, next: NextFunction)
-    {        
-       
+    public getFutureLog(req: any, res: Response, next: NextFunction)
+    {               
         try
         {
             var body = req.body; 
+            const userId = req.user.sub;
             const inicio = new Date(body.data);
             let fim = new Date(body.data);
             let dataInicio = inicio.toISOString().substring(0,5) + '01-01';
             let dataFim = fim.toISOString().substring(0,5) + '12-31';
             let dailyService: DailyService = new DailyService();
 
-            dailyService.getDaily(dataInicio, dataFim)
+            dailyService.getDaily(dataInicio, dataFim, userId)
                 .then(function(dailyLog)
                 {
                     res.status(200).json(dailyLog);

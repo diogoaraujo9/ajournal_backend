@@ -41,13 +41,21 @@ class DailyLogRepository
     }
 
     
-    public async getDaily(dataInicio: String, dataFim: String): Promise<DailyLog>
+    public async getDaily(dataInicio: String, dataFim: String, _userId: string): Promise<DailyLog>
     {
         try 
         {
-            const query = await DailyModel.where('data').gte(dataInicio).lte(dataFim);
+            const query = {
+                data: {
+                    $gt: dataInicio, 
+                    $lt: dataFim
+                }, 
+                userId: _userId
+            };
+
+            const dailyLogs = await DailyModel.find(query);//('data').gte(dataInicio).lte(dataFim);
     
-            return query;
+            return dailyLogs;
         } 
         catch (error) 
         {

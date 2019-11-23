@@ -32,14 +32,14 @@ export default class DailyService
         }
     }
 
-    public async getDaily(_dataInicio: String, _dataFim: String): Promise<DailyLog>
+    public async getDaily(_dataInicio: String, _dataFim: String, _userId: string): Promise<DailyLog>
     {
         try 
         {
             const dataInicio = _dataInicio;
             const dataFim = _dataFim;
 
-            const query = await dailyLogRepository.getDaily(dataInicio, dataFim);
+            const query = await dailyLogRepository.getDaily(dataInicio, dataFim, _userId);
             
             return query;
         } 
