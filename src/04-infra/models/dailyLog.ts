@@ -8,7 +8,8 @@ let dailySchema = new mongoose1.Schema({
     data: String,
     categoriaId: String,
     tarefaCompleta: Boolean,
-    userId: String
+    userId: String,
+    categoriaIndex: Number
 })
 
 module.exports = mongoose1.model('dailyLog', dailySchema);
